@@ -74,7 +74,9 @@ if (isset($_POST['submit'])) {
 <form
     action=""
     method="post">
-    User Name: <input type="text" name="name"><br>
+    User Name: <input type="text" name="name" value="<?php
+    echo htmlspecialchars($name, ENT_QUOTES);
+    ?>"><br>
     Password: <input type="password" name="password"><br>
     Gender: <input type="radio" name="gender" value="f"> female
             <input type="radio" name="gender" value="m"> male
@@ -82,18 +84,21 @@ if (isset($_POST['submit'])) {
 
     Favorite color: 
     <select name="color">
+        <option value="">Please Select</option>
         <option value="#f00">Red</option>
         <option value="#0f0">Green</option>
         <option value="#00f">Blue</option>
     </select><br>
 
     Languages spoken: 
-    <select name="languages[]">
+    <select name="languages[]" multiple size="3">
         <option value="en">English</option>
         <option value="fr">French</option>
         <option value="it">Italian</option>
     </select><br>
-    Comments: <textarea name="comments"></textarea><br>
+    Comments: <textarea name="comments"><?php
+    echo htmlspecialchars($comments, ENT_QUOTES);
+    ?></textarea><br>
     <input type="checkbox" name="tc" value="ok">
     I accept the T&amp;C<br>
 
