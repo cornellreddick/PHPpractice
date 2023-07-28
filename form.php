@@ -78,9 +78,21 @@ if (isset($_POST['submit'])) {
     echo htmlspecialchars($name, ENT_QUOTES);
     ?>"><br>
     Password: <input type="password" name="password"><br>
-    Gender: <input type="radio" name="gender" value="f"> female
-            <input type="radio" name="gender" value="m"> male
-            <input type="radio" name="gender" value="o"> other<br>
+    Gender: <input type="radio" name="gender" value="f"<?php
+        if ($gender === 'f'){
+            echo ' checked';
+        }
+    ?>> female
+            <input type="radio" name="gender" value="m"<?php
+        if ($gender === 'm'){
+            echo ' checked';
+        }
+    ?>> male
+            <input type="radio" name="gender" value="o"<?php
+        if ($gender === 'o'){
+            echo ' checked';
+        }
+    ?>> other<br>
 
     Favorite color: 
     <select name="color">
@@ -99,7 +111,11 @@ if (isset($_POST['submit'])) {
     Comments: <textarea name="comments"><?php
     echo htmlspecialchars($comments, ENT_QUOTES);
     ?></textarea><br>
-    <input type="checkbox" name="tc" value="ok">
+    <input type="checkbox" name="tc" value="ok"<?php
+        if ($tc === 'ok'){
+            echo ' checked';
+        }
+    ?>>
     I accept the T&amp;C<br>
 
     <input type="submit" name="submit" value="Register">
