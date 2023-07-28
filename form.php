@@ -10,27 +10,46 @@ $comments = '';
 $tc = '';
 
 if (isset($_POST['submit'])) {
-    if (isset($_POST['name'])) {
-        $name = $_POST['name'];
+
+    $ok = true;
+
+    if (!isset($_POST['name']) || $_POST['name'] === '') {      
+        $ok = false;
+        } else {      
+        $name = $_POST['name'];          
     };
-    if (isset($_POST['password'])) {
+    if (!isset($_POST['password']) || $_POST['password'] === '') {
+        $ok = false;
+        } else { 
         $password = $_POST['password'];
     };
-    if (isset($_POST['gender'])) {
+    if (!isset($_POST['gender']) || $_POST['gender'] === '') {
+        $ok = false;
+        } else { 
         $gender = $_POST['gender'];
     };
-    if (isset($_POST['color'])) {
+    if (!isset($_POST['color']) || $_POST['color'] === '') {
+        $ok = false;
+        } else { 
         $color = $_POST['color'];
     };
-    if (isset($_POST['languages'])) {
+    if (!isset($_POST['languages']) || !is_array($_POST['languages']) || count($_POST['languages']) === 0) {
+        $ok = false;
+    } else {
         $languages = $_POST['languages'];
     };
-    if (isset($_POST['comments'])) {
+    if (!isset($_POST['comments']) || $_POST['comments'] === '') {
+        $ok = false;
+        } else { 
         $comments = $_POST['comments'];
     };
-    if (isset($_POST['tc'])) {
+    if (!isset($_POST['tc']) || $_POST['tc'] === '') {
+        $ok = false;
+        } else { 
         $tc = $_POST['tc'];
     };
+
+    if($ok){
 
         printf('User name: %s
         <br>Password: %s
@@ -46,6 +65,7 @@ if (isset($_POST['submit'])) {
         htmlspecialchars(implode('  ',$languages), ENT_QUOTES),
         htmlspecialchars($comments, ENT_QUOTES),
         htmlspecialchars($tc, ENT_QUOTES));
+    }
 
 }
 
