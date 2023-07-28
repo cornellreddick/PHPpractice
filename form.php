@@ -97,16 +97,40 @@ if (isset($_POST['submit'])) {
     Favorite color: 
     <select name="color">
         <option value="">Please Select</option>
-        <option value="#f00">Red</option>
-        <option value="#0f0">Green</option>
-        <option value="#00f">Blue</option>
+        <option value="#f00"<?php
+        if ($color === '#f00'){
+            echo ' selected';
+        }
+    ?>>Red</option>
+        <option value="#0f0"<?php
+        if ($color === '#0f0'){
+            echo ' selected';
+        }
+    ?>>Green</option>
+        <option value="#00f"<?php
+        if ($color === '#00f'){
+            echo ' selected';
+        }
+    ?>>Blue</option>
     </select><br>
 
     Languages spoken: 
     <select name="languages[]" multiple size="3">
-        <option value="en">English</option>
-        <option value="fr">French</option>
-        <option value="it">Italian</option>
+        <option value="en"<?php
+            if(in_array('en', $languages)){
+                echo ' selected';
+            }
+        ?>>English</option>
+        <option value="fr"<?php
+            if(in_array('fr', $languages)){
+                echo ' selected';
+            }
+        ?>>French</option>
+        <option value="it"<?php
+            if(in_array('it', $languages)){
+                echo ' selected';
+            }
+        ?>>Italian</option>
     </select><br>
     Comments: <textarea name="comments"><?php
     echo htmlspecialchars($comments, ENT_QUOTES);
