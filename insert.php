@@ -43,34 +43,47 @@ if (isset($_POST['submit'])) {
                 echo '<p>User added.</p>';
                 $db->close();
 
-}}
+    }
+
+}
+
+readFile('header.tmpl.html');
 
 ?>
 
 <form
     action=""
     method="post">
-    User Name: <input type="text" name="name" value="<?php
+    User Name: <input type="text" class="form-control" name="name" value="<?php
     echo htmlspecialchars($name, ENT_QUOTES);
     ?>"><br>
-    Gender: <input type="radio" name="gender" value="f"<?php
+    <div class="form-group">
+        <div><label>Gender</label></div>
+    <input type="radio" name="gender" value="f"<?php
         if ($gender === 'f'){
             echo ' checked';
         }
-    ?>> female
+    ?>> 
+    <label class="form-check-label" for="gender-f">female</label>
+    <div class="form-check form-check-inline">
             <input type="radio" name="gender" value="m"<?php
         if ($gender === 'm'){
             echo ' checked';
         }
-    ?>> male
-            <input type="radio" name="gender" value="o"<?php
+    ?>>
+    <label class="form-check-label" for="gender-m">male</label>
+    </div>
+    <div class="form-check form-check-inline">
+            <input type="radio" ]name="gender-o" value="o"<?php
         if ($gender === 'o'){
             echo ' checked';
         }
-    ?>> other<br>
-
-    Favorite color: 
-    <select name="color">
+    ?>>    <label class="form-check-label" for="gender">other</label>
+    </div>
+   </div>
+    <div class="form-group">
+    <label for="color">Favorite color</label> 
+    <select class="form-control" name="color">
         <option value="">Please Select</option>
         <option value="#f00"<?php
         if ($color === '#f00'){
@@ -87,7 +100,12 @@ if (isset($_POST['submit'])) {
             echo ' selected';
         }
     ?>>Blue</option>
-    </select><br>
+    </select>
+    </div>
 
     <input type="submit" name="submit" value="Register">
 </form>
+
+<?php
+    readfile('footer.tmpl.html');
+?>
