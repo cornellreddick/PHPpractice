@@ -16,6 +16,11 @@ if (isset($_POST['submit'])) {
         } else {      
         $name = $_POST['name'];          
     };
+    if (!isset($_POST['password']) || $_POST['password'] === '') {      
+        $ok = false;
+        } else {      
+        $password = $_POST['password'];          
+    };
     if (!isset($_POST['gender']) || $_POST['gender'] === '') {
         $ok = false;
         } else { 
@@ -28,16 +33,20 @@ if (isset($_POST['submit'])) {
     };  
 
     if($ok) {
+
+        $hash = password_hash($password, PASSWORD_DEFAULT);
+
         $db = new mysqli(
             MYSQL_HOST, MYSQL_USER, MYSQL_PASSWORD, MYSQL_DATABASE
         );
     
         $sql = sprintf(
-            "INSERT INTO users (name, gender, color) VALUES (
-             '%s', '%s', '%s')", 
+            "INSERT INTO users (name, gender, color, hash) VALUES (
+             '%s', '%s', '%s', '%s')", 
              $db->real_escape_string($name),
              $db->real_escape_string($gender),
-             $db->real_escape_string($color));
+             $db->real_escape_string($color),
+             $db->real_escape_string($hash));
 
                 $db->query($sql);
                 echo '<p>User added.</p>';
@@ -54,10 +63,14 @@ readFile('header.tmpl.html');
 <form
     action=""
     method="post">
-    User Name: <input type="text" class="form-control" name="name" value="<?php
+    User Name <input type="text" class="form-control" name="name" value="<?php
     echo htmlspecialchars($name, ENT_QUOTES);
     ?>"><br>
     <div class="form-group">
+    <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" class="form-control" name="password" id="password">
+    </div>
         <div><label>Gender</label></div>
     <input type="radio" name="gender" value="f"<?php
         if ($gender === 'f'){
