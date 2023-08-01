@@ -6,6 +6,7 @@ require 'config.inc.php';
 $name = '';
 $gender = '';
 $color = '';
+$password = '';
 
 if (isset($_POST['submit'])) {
 
@@ -63,7 +64,7 @@ readFile('header.tmpl.html');
 <form
     action=""
     method="post">
-    User Name <input type="text" class="form-control" name="name" value="<?php
+    User Name <input type="text" class="form-control" name="name" id="name" value="<?php
     echo htmlspecialchars($name, ENT_QUOTES);
     ?>"><br>
     <div class="form-group">
